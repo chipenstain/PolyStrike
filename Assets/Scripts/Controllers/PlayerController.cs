@@ -49,7 +49,7 @@ namespace PolyStrike
 						Vector3 touchPosition = Input.GetTouch(0).position;
 						shootDelayTimer = 0f;
 
-						Bullet bulletObj = PoolContainer.Instance.Pool.Get();
+						Bullet bulletObj = PoolContainer.Instance.GetPoolObj();
 						bulletObj.transform.position = AIMPoint.position;
 
 						if (Physics.Raycast(cameraObj.ScreenPointToRay(touchPosition), out RaycastHit hit, 600, ~(1 << 3)))

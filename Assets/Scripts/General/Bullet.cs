@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace PolyStrike
 {
 	[RequireComponent (typeof(Rigidbody))]
     public class Bullet : MonoBehaviour
-    {
-		public IObjectPool<Bullet> pool;
+	{ 
 		private Rigidbody rigidBody;
 
 		[SerializeField] private float speed = 1f;
@@ -24,7 +22,7 @@ namespace PolyStrike
 			activeTimer += Time.deltaTime;
 			if(activeTimer >= ACTIVETIME)
 			{
-				pool.Release(this);
+				PoolContainer.Instance.ReturnPoolObj(this);
 			}
 		}
 
@@ -36,7 +34,7 @@ namespace PolyStrike
 
 		private void OnCollisionEnter(Collision other)
 		{
-			pool.Release(this);
+			PoolContainer.Instance.ReturnPoolObj(this);
 		}
     }
 }
